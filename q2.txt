@@ -1,0 +1,27 @@
+import random
+import string
+
+def generate_random_name():
+    return ''.join(random.choices(string.ascii_lowercase, k=7))
+
+students = {
+    'Roll No.': list(range(1, 11)),
+    'Name': [generate_random_name() for _ in range(10)],
+    'Gender': np.random.choice(['M', 'F'], size=10),
+    'Marks1': np.random.randint(0, 100, size=10),
+    'Marks2': np.random.randint(0, 100, size=10),
+    'Marks3': np.random.randint(0, 100, size=10)
+}
+
+df = pd.DataFrame(data=students)
+df.set_index('Roll No.', inplace=True)
+df
+df['TotalMarks'] = df['Marks1'] + df['Marks2'] + df['Marks3']
+df
+print(f"Lowest marks in Marks1: {np.min(df['Marks1'])}")
+print(f"Highest marks in Marks2: {np.max(df['Marks2'])}")
+print(f"Average marks in Marks3: {np.mean(df['Marks3'])}")
+df['Average'] = df['TotalMarks'] / 3
+df
+print(f"{df.loc[df['Average'].idxmax(), 'Name']} has the highest average of {df['Average'].max()}")
+print(f"Number of students failed in Marks2: {df[df['Marks2'] < 40].shape[0]}")

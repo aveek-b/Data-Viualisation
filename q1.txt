@@ -1,0 +1,19 @@
+import numpy as np
+import pandas as pd
+temps = np.random.randint(-10, 50, size=7)
+days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']
+temp_series = pd.Series(temps, index=days)
+temp_series
+print(f"Mean temperature: {np.mean(temp_series)}")
+print(f"Maximum temperature: {np.max(temp_series)} on {temp_series.idxmax()}")
+print(f"Minimum temperature: {np.min(temp_series)} on {temp_series.idxmin()}")
+val = int(input("Enter a value: "))
+greater = temp_series[temp_series > val]
+print(f"Temperatures greater than {val}:")
+greater
+temp_series_f = (temp_series * 9/5) + 32
+print("Temperatures in Fahrenheit:")
+temp_series_f
+above_avg = temp_series[temp_series > np.mean(temp_series)]
+print("Temperatures above average:")
+above_avg
